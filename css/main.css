@@ -1,0 +1,409 @@
+/* リセットと基本設定 */
+* {
+    box-sizing: border-box;
+    /* paddingやborderをwidth/heightに含める */
+    font-family: 'Roboto', sans-serif;
+    /* マテリアルデザイン推奨フォント */
+}
+
+body {
+    margin: 0;
+    /* background-color: #f5f5f5; */
+    /* マテリアルデザインの背景色 */
+    background-color: #e0e0e0;
+    /* Neumorphismの背景色 */
+    color: #333;
+}
+
+.modal-content,
+.product-card {
+    background-color: #e0e0e0;
+}
+
+/* ---------------------------------------------------- */
+/* 1. グリッドシステム (12カラム) */
+/* ---------------------------------------------------- */
+.container {
+    width: 90%;
+    /* コンテナの最大幅を設定 */
+    max-width: 1400px;
+    margin: 0 auto;
+    /* CSS Gridを有効にし、12カラムを定義 */
+    display: grid;
+    /* repeat(12, 1fr)で12個の均等な幅(1fr)のカラムを作成 */
+    grid-template-columns: repeat(12, 1fr);
+    /* カラム間の間隔 (gutter) */
+    gap: 16px;
+    padding: 20px 0;
+    /* 上下のパディング */
+}
+
+/* col-X: Xカラム分を占有 */
+.col-12 {
+    grid-column: span 12;
+}
+.col-9 {
+    grid-column: span 9;
+}
+
+.col-8 {
+    grid-column: span 8;
+}
+
+.col-6 {
+    grid-column: span 6;
+}
+
+.col-4 {
+    grid-column: span 4;
+}
+
+.col-3 {
+    grid-column: span 3;
+}
+
+.col-2 {
+    grid-column: span 2;
+}
+
+/* その他のcol-Xは省略しますが、必要に応じて追加 */
+
+
+/* レスポンシブ対応 (モバイルファースト) */
+@media (max-width: 767px) {
+
+    /* モバイルでは全てを全幅に（スタック表示） */
+    .col-12,
+    .col-9,
+    .col-8,
+    .col-6,
+    .col-4,
+    .col-3,
+    .col-2 {
+        grid-column: span 12;
+    }
+}
+
+/* ---------------------------------------------------- */
+/* 2. マテリアルデザイン/コンポーネントスタイル */
+/* ---------------------------------------------------- */
+
+/* Flexboxユーティリティ */
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+/* ヘッダー */
+.header {
+    background-color: #007bff;
+    /* プライマリーカラー */
+    color: white;
+    padding: 15px 5%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* オークションカードスタイル */
+.product-card {
+    /* col-4として定義 */
+    /* border: 1px solid #ddd; */
+    border: none;
+    border-radius: 12px;
+    /* 角丸 */
+    background-color: white;
+    padding: 18px;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    /* 浮き出し効果 */
+    /* transition: box-shadow 0.3s; */
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    margin-bottom: 16px;
+    /* グリッド外の垂直方向の間隔 */
+    box-shadow:
+        7px 7px 15px rgba(174, 174, 192, 0.4),
+        -7px -7px -15px rgba(255, 255, 255, 0.7);
+}
+
+
+
+.product-card:hover {
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); */
+    /* ホバー時の凹み効果 */
+    box-shadow:
+        inset 2px 2px 5px rgba(174, 174, 192, 0.4),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.7);
+}
+
+
+/* .product-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+} */
+
+.auction-status {
+    margin-top: 10px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+/* 現在価格の強調 */
+.current-price-display,
+.highest-bid-display {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #28a745;
+    /* 成功・利益を示す色 */
+}
+
+/* タイマー表示 */
+.timer-display-list {
+    font-weight: bold;
+    color: #dc3545;
+    /* 警告色 */
+}
+
+/* 緊急クラス（残り時間が少ない時）のスタイル */
+@keyframes blink-warning {
+
+    0%,
+    100% {
+        color: #ff0000;
+        background-color: transparent;
+    }
+
+    50% {
+        color: white;
+        background-color: #ff0000;
+    }
+
+    /* 反転させて点滅感を強調 */
+}
+
+.timer-urgent {
+    animation: blink-warning 1s infinite alternate;
+    /* 1秒間隔で無限に点滅 */
+    padding: 3px 6px;
+    border-radius: 4px;
+}
+
+/* ---------------------------------------------------- */
+/* 3. FAB (フローティング・アクション・ボタン) */
+/* ---------------------------------------------------- */
+.fab-button {
+    position: fixed;
+    z-index: 1010;
+    bottom: 80px;
+    right: 32px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    /* アクセントカラー */
+    color: #007bff;
+    font-size: 0;
+    /* font-weight: 600; */
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow:
+        7px 7px 15px rgba(174, 174, 192, 0.4),
+        -7px -7px -15px rgba(255, 255, 255, 0.7);
+}
+
+.fab-button::before {
+    /* "+"アイコンをCSSで表現 (よりクリーン) */
+    content: '+'; 
+    font-size: 32px; 
+    line-height: 60px;
+    display: block;
+    text-align: center;
+}
+
+.fab-button:hover {
+    /* ホバー時の沈み込み効果 */
+    transform: none; /* 既存のtransformを無効化 */
+    box-shadow: 
+        inset 5px 5px 10px rgba(174, 174, 192, 0.4), 
+        inset -5px -5px 10px rgba(255, 255, 255, 0.7);
+}
+
+
+/* ---------------------------------------------------- */
+/* 4. モーダル（ポップアップ）構造 */
+/* ---------------------------------------------------- */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* 暗い背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    max-width: 90%;
+    width: 550px;
+    position: relative;
+    max-height: 90vh;
+    /* 縦長になりすぎないように */
+    overflow-y: auto;
+    /* コンテンツがはみ出たらスクロール */
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* フォーム要素 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    transition: border-color 0.2s;
+    resize: vertical;
+    /* テキストエリアのサイズ変更を縦のみ可 */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+    /* フォーカス時の色 */
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+
+/* ---------------------------------------------------- */
+/* 5. FAP (フローティング・アクション・パネル) */
+/* ---------------------------------------------------- */
+#floating-bid-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 0;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none;
+    /* 初期は非表示 */
+}
+
+.fap-content {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.fap-timer-display {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: white;
+    /* 目立つ黄色 */
+    margin-left: 10px;
+    letter-spacing: 1px;
+}
+
+.fap-bid-form {
+    gap: 10px;
+}
+
+.fap-bid-input {
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    width: 150px;
+    text-align: right;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+}
+
+.fap-bid-button {
+    padding: 10px 20px;
+    background-color: #ff4500;
+    /* アクションを促す赤 */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.fap-bid-button:hover:not(:disabled) {
+    background-color: #e63e00;
+}
+
+.fap-bid-button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}

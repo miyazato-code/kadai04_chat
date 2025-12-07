@@ -1,0 +1,8 @@
+# macOS files
+.DS_Store
+
+# VS Code の設定ファイル
+.vscode/
+
+# Firebase の設定　機密情報
+js/firebase-config-secrets.js

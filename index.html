@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>オークション</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <body>
+        <header class="header col-12">
+            <h1>オークション</h1>
+        </header>
+
+        <main class="container">
+            <div class="col-2"></div>
+            <section class="col-8 auction-list-area">
+                <h2>リスティング</h2>
+                <div id="auction-cards-container" class="col-12">
+                </div>
+            </section>
+
+            <section class="col-12 additional-info">
+            </section>
+            <div class="col-2"></div>
+        </main>
+
+        <button id="fab-open-modal" class="fab-button">出品</button>
+
+
+
+        <div id="floating-bid-panel">
+            <div class="fap-content d-flex justify-between align-center">
+                <div class="fap-timer d-flex align-center">
+                    <strong>残り時間: </strong> <span id="fap-countdown" class="fap-timer-display">00:00:00</span>
+                </div>
+                <form id="fap-bid-form" class="fap-bid-form d-flex align-center">
+                    <input type="text" id="fap-bidder-name" class="fap-bid-input" placeholder="入札者名(任意)" minlength="2"
+                        maxlength="8">
+                    <input type="number" id="fap-bid-input" class="fap-bid-input" placeholder="入札額を入力" min="100"
+                        step="100" required>
+                    <button type="submit" id="fap-bid-button" class="fap-bid-button" disabled>入札する</button>
+                    <button id="fap-close-button" class="fap-close">&times;</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="creation-modal" class="modal-backdrop hidden">
+            <div class="modal-content">
+                <button id="modal-close-button" class="modal-close">&times;</button>
+                <section class="auction-creation-form col-12">
+                    <h2>新規オークション出品</h2>
+                    <form id="create-auction-form">
+                        <div class="form-group">
+                            <label for="productName">商品名</label>
+                            <input type="text" id="productName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productDescription">商品説明</label>
+                            <textarea id="productDescription" rows="3" placeholder="商品の説明を記入してください。(140文字以内)"
+                                maxlength="140"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="minPrice">最低価格 (円)</label>
+                            <input type="number" id="minPrice" min="100" step="100" required>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="auctionDuration">オークション終了まで(最大72時間)</label>
+                            <input type="number" id="auctionDuration" min="1" max="72" step="1" value="24" required>
+                        </div>
+
+                        <button type="submit" class="submit-button">出品開始</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+
+        <script type="module" src="js/main.js"></script>
+    </body>
+
+</html>
