@@ -62,7 +62,7 @@ modal.addEventListener('click', (e) => {
 });
 
 
-// --- [3] 新規出品ロジック (Create: C) ---
+// --- [3] 新規出品ロジック ---
 
 createForm.addEventListener('submit', function (e) {
     e.preventDefault(); // フォームのデフォルトの送信動作（ページ遷移）を停止
@@ -116,7 +116,7 @@ createForm.addEventListener('submit', function (e) {
 });
 
 
-// --- [4] オークションカード描画ロジック (Read: R) ---
+// --- [4] オークションカード描画ロジック ---
 
 // 受け取ったデータを元に、DOM要素（カード）を生成する関数
 function createAuctionCard(item) {
@@ -330,7 +330,7 @@ function handleAuctionEnd(itemId) {
 }
 
 
-// --- [5] 入札ロジック (Update: U) ---
+// --- [5] 入札ロジック ---
 
 // FAPの情報を更新する関数
 function updateFAP(item) {
@@ -345,54 +345,6 @@ function updateFAP(item) {
     fapBidInput.value = nextMinBid; // 入力欄に初期値をセット
 }
 
-// 入札フォームの送信イベント
-// fapBidForm.addEventListener('submit', function (e) {
-//     e.preventDefault();
-
-//     let bidAmount = parseInt(fapBidInput.value, 10);
-
-//     // 現在選択中のアイテムをデータストアから検索
-//     const cardElement = document.querySelector(`.product-card[data-product-id="${selectedAuctionId}"]`);
-//     if (!cardElement) return ;
-
-//     // DOMから現在の価格と入札数を取得
-//     const currentPriceText = cardElement.querySelector('.current-price-display').textContent.replace('¥', '').replace(/,/g, '');
-//     const currentPrice = parseInt(currentPriceText, 10);
-//     const currentBidCount = parseInt(cardElement.querySelector('.bid-count-display').textContent, 10);
-
-//     // 入札額のバリデーション
-//     const nextMinBid = currentPrice + 100;
-
-//     // 1. 選択アイテムの存在チェック
-//     // 2. 入札額が現在の最高額 + 100円に達しているかチェック
-//     // 3. **100円単位**で入力されているかチェック
-//     if (!selectedAuctionId || bidAmount < nextMinBid || bidAmount % 100 !== 0) {
-//         alert(`無効な入札額です。\n・最低入札額: ¥${nextMinBid.toLocaleString()}以上\n・入札額は100円単位である必要があります。`);
-//         fapBidInput.value = nextMinBid; // 無効なら正しい値に戻す
-//         return;
-//     }
-
-//     // データストアの値を更新
-//     const itemRef = ref(db, `chat/${selectedAuctionId}`);
-
-//     const updateData = {
-//         currentPrice: bidAmount,
-//         bidCount: currentBidCount + 1, // 現在の値に1を加算してDBに送信
-//     };
-
-//     // update関数で指定したフィールドのみを部分的に更新
-//     update(itemRef, updateData)
-//         .then(() => {
-//             // 成功時: UIを即時更新し、UXを向上させる
-//             updateCardUI({ id: selectedAuctionId, ...updateData });
-//             updateFAP({ currentPrice: updateData.currentPrice });
-//             alert(`¥${bidAmount.toLocaleString()}で入札しました！`);
-//         })
-//         .catch((error) => {
-//             console.error("入札エラー:", error);
-//             alert('入札に失敗しました。');
-//         });
-// });
 
 fapBidForm.addEventListener('submit', function (e) {
     e.preventDefault();
